@@ -93,7 +93,7 @@ export default function Home() {
             priority
             className="h-[55vh] w-full object-cover"
           />
-          <div className="absolute inset-0 bg-sky-950/25" />
+          
           <div className="relative mx-auto max-w-3xl px-4 pt-16 text-center sm:px-8 sm:pt-24">
             <p className="text-sm font-semibold uppercase tracking-widest text-sky-700">The PawClock Tower</p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Wind up. Puzzle on. Play all day.</h1>

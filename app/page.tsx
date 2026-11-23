@@ -80,6 +80,7 @@ export default function Home() {
         <nav className="flex items-center gap-6">
           <Link href="/" className="text-sm font-medium text-slate-700 hover:text-sky-600">Home</Link>
           <Link href="/product" className="rounded-full bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-600">Shop the PawClock Tower</Link>
+          <Link href="/cart" className="text-sm font-medium text-slate-700 hover:text-sky-600">Cart</Link>
         </nav>
       </header>
 

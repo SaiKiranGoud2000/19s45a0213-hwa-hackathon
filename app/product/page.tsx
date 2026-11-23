@@ -22,7 +22,7 @@ const sizes = [
 export default function ProductPage() {
   const router = useRouter();
   const { addItem } = useCart();
-  const [imageIndex, setImageIndex] = useState(0);
+  const [imageIndex, setImageIndex] = useState(3);
   const [sizeId, setSizeId] = useState("small");
 
   const size = sizes.find((s) => s.id === sizeId) ?? sizes[0];

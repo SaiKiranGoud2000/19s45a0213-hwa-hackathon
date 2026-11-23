@@ -10,6 +10,7 @@ const images = [
   { id: "front", src: "/images/product-front.jpg", alt: "The PawClock Tower in blue and white" },
   { id: "top", src: "/images/product-top.jpg", alt: "The top of the PawClock Tower" },
   { id: "chamber", src: "/images/chamber-closeup.jpg", alt: "Close up of a chamber of the PawClock Tower" },
+  { id: "playing", src: "/images/dog-using.jpg", alt: "Dog playing with the PawClock Tower" },
 ];
 
 const sizes = [
@@ -55,7 +56,7 @@ export default function ProductPage() {
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-sky-50">
                 <Image src={image.src} alt={image.alt} width={900} height={900} priority className="h-full w-full object-cover" />
               </div>
-              <div className="mt-4 grid grid-cols-3 gap-3">
+              <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {images.map((img, index) => (
                   <button
                     key={img.id}

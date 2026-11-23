@@ -98,7 +98,7 @@ export default function Home() {
           <div className="relative mx-auto max-w-3xl px-4 pt-16 text-center sm:px-8 sm:pt-24">
             <p className="text-sm font-semibold uppercase tracking-widest text-sky-700">The PawClock Tower</p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Wind up. Puzzle on. Play all day.</h1>
-            <p className="mt-4 text-lg text-slate-700">A battery-free wind-up puzzle that keeps your dog happily busy.</p>
+            <p className="mt-4 text-lg text-slate-700">A battery-free wind-up puzzle that keeps your dog happily busy.</p>\n            <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-sky-700">Play for hours</p>
             <Link href="/product" className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-sky-500 px-8 text-base font-semibold text-white hover:bg-sky-600">Shop the PawClock Tower</Link>
           </div>
         </section>

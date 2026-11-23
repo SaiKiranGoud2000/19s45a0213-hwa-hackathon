@@ -71,6 +71,9 @@ export default function CartPage() {
               <p className="text-lg font-semibold text-slate-900">Total</p>
               <p className="text-2xl font-bold text-slate-900">Rs. {total}</p>
             </div>
+            <div className="mt-6">
+              <Link href="/checkout" className="inline-flex h-12 w-full items-center justify-center rounded-full bg-sky-500 px-8 text-base font-semibold text-white hover:bg-sky-600 sm:w-auto">Proceed to Checkout</Link>
+            </div>
           </div>
         )}
       </main>

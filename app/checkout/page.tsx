@@ -2,6 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useCart } from "../context/CartContext";
 
 type FormValues = {
   name: string;
@@ -15,6 +17,14 @@ type FormErrors = {
   email?: string;
   phone?: string;
   address?: string;
+};
+
+type OrderItem = {
+  id: string;
+  product: string;
+  sizeLabel: string;
+  price: number;
+  qty: number;
 };
 
 const initialValues: FormValues = {
@@ -59,23 +69,60 @@ function validate(values: FormValues): FormErrors {
 }
 
 export default function CheckoutPage() {
+  const router = useRouter();
+  const { items, clearCart } = useCart();
   const [values, setValues] = useState<FormValues>(initialValues);
+  const [orderError, setOrderError] = useState("");
 
   const errors: FormErrors = validate(values);
-
   const isValid = Object.keys(errors).length === 0;
 
   const updateField = (field: keyof FormValues, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }));
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!isValid) {
       return;
     }
-    // Order placed - the cart would be cleared here in a full build.
-    setValues(initialValues);
+
+    const orderItems: OrderItem[] = items.map((item) => ({
+      id: item.id,
+      product: item.product,
+      sizeLabel: item.sizeLabel,
+      price: item.price,
+      qty: item.qty,
+    }));
+
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: values.name.trim(),
+        email: values.email.trim(),
+        phone: values.phone.trim(),
+        address: values.address.trim(),
+        items: orderItems,
+      }),
+    });
+
+    if (!response.ok) {
+      const data = (await response.json().catch(() => ({}))) as { error?: string };
+      setOrderError(data.error ?? "The order could not be placed. Please try again.");
+      return;
+    }
+
+    const data = (await response.json()) as { orderNumber?: string; total?: number; email?: string };
+    clearCart();
+
+    const params = new URLSearchParams();
+    params.set("order", String(data.orderNumber ?? ""));
+    params.set("total", String(data.total ?? 0));
+    params.set("email", String(data.email ?? ""));
+    params.set("name", values.name.trim());
+    params.set("items", JSON.stringify(orderItems));
+    router.push("/order-confirmation?" + params.toString());
   };
 
   const fieldError = (field: keyof FormValues) =>
@@ -149,6 +196,8 @@ export default function CheckoutPage() {
               {fieldError("address")}
             </div>
           </div>
+
+          {orderError ? <p className="mt-4 text-sm font-medium text-red-600">{orderError}</p> : null}
 
           <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto">
             <button

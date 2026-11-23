@@ -92,7 +92,7 @@ export default function Home() {
             width={1600}
             height={900}
             priority
-            className="h-[55vh] w-full object-cover"
+            className="aspect-[16/9] w-full object-cover"
           />
           
           <div className="relative mx-auto max-w-3xl px-4 pt-16 text-center sm:px-8 sm:pt-24">
